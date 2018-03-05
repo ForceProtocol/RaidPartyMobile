@@ -1,0 +1,220 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600');
+/*** Common Styling ***/
+body { font-family: 'Montserrat'; font-weight: 400; background: #3f7071;
+background: -moz-linear-gradient(-45deg, #3f7071 0%, #064852 100%);
+background: -webkit-linear-gradient(-45deg, #3f7071 0%,#064852 100%);
+background: linear-gradient(135deg, #3f7071 0%,#064852 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f7071', endColorstr='#064852',GradientType=1 );}
+ion-app.app-root,.app-root,.content { background: transparent; }
+ion-app.app-root { font-family: 'Montserrat'; font-weight: 400; }
+p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !important; color: #ffffff !important; }
+.ion-page { background: #3f7071;
+	background: -moz-linear-gradient(-45deg, #3f7071 0%, #064852 100%);
+	background: -webkit-linear-gradient(-45deg, #3f7071 0%,#064852 100%);
+	background: linear-gradient(135deg, #3f7071 0%,#064852 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f7071', endColorstr='#064852',GradientType=1 );}
+
+@mixin btn_style(){
+	font-family: "Montserrat";
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 19px;
+	height: auto;
+	padding: 15px 50px;
+	margin: 20px 0;
+	color: #FDFDFD;
+	border: 2px solid #FDFDFD;
+	border-radius: 27px;
+	width: 100%;
+	letter-spacing: 1px;
+	transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	&:hover {
+		background: #ffffff;
+		color: #064852;
+		border-color: #064852;
+	}
+}
+@mixin input_style(){
+	border: 2px solid #517E82;
+	margin: 0;
+	border-radius: 24px;
+	padding: 15px 15px 15px 48px;
+	width: 100%;
+	color: #ffffff;
+	font-size: 16px;
+	line-height: 19px;
+	background-repeat: no-repeat;
+	background-position: top left;
+	background-size: 48px;
+	&::-moz-placeholder { color: #6B9296; }
+	&::-webkit-input-placeholder { color: #6B9296; }
+	&:-ms-input-placeholder { color: #6B9296; }
+	&::-o-placeholder { color: #6B9296; }
+}
+
+.logo.item {
+    background: transparent;
+    padding: 0;
+    & .item-inner{
+    	padding: 0;
+    	border: none;
+    	& .label{
+    		margin: 60px 0 40px;
+    		text-align: center;
+    	}
+    }
+}
+.item {
+	background: transparent;
+	border: none !important;
+    padding: 0;
+    & .item-inner{
+    	padding: 0 !important;
+    	border: none !important;
+    }
+}
+.common-btns {
+	margin: 0;
+	& .label {
+		text-align: center;
+		margin: 0;
+		padding: 0 15px;
+	}
+	& .item-button.button-outline{
+		@include btn_style();
+	}
+}
+.form-inputs {
+	& .email-input {
+		& input {
+			background-image: url('../assets/imgs/mail-sprite.png');
+		}
+	}
+	& .pwd-input {
+		& input {
+			background-image: url('../assets/imgs/pwd-sprite.png');
+		}
+	}
+	& .pin-input {
+		& input {
+			background-image: url('../assets/imgs/pin-sprite.png');
+		}
+	}
+	& input {
+		@include input_style();
+	}
+	& .item-input {
+		border: none !important;
+		margin-bottom: 30px;
+		&.ng-invalid.ng-touched {
+			& .item-inner{
+				box-shadow: none !important; 
+			}
+			& input {
+				border-color: red;
+			}
+		}
+		
+		&.ng-valid {
+			& .item-inner{
+				box-shadow: none !important;
+			}
+			& input {
+				border-color: #32db64;
+			}
+		}
+		&.input-has-focus {
+			box-shadow: none !important;
+			& .item-inner {
+				box-shadow: none;
+			}
+			& input {
+				border-color: #ffffff;
+				background-position: bottom left;
+			}
+		}
+		&.input-has-value {
+			& input {
+				border-color: #ffffff;
+				background-position: bottom left;
+			}
+		}
+	}
+}
+.other-links {
+	margin-top: 10px;
+	& .button {
+		text-transform: inherit; 
+		color: #ffffff; 
+		padding: 0 !important; 
+		margin: 0; 
+		height: auto !important; 
+		font-size: 14px !important; 
+		overflow: visible; 
+		line-height: 18px; 
+		font-weight: 300;
+		vertical-align: middle;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+	& .label {
+		margin: 0;
+		text-align: center;
+		& div{
+			margin: 10px 0;
+		}
+	}
+}
+.text {
+	margin-bottom: 25px;
+	& .label {
+		margin: 0;
+		white-space: normal;
+		text-align: center;
+	}
+}
+.toolbar {
+	& .toolbar-background {
+		background: transparent;
+		border: none;
+		box-shadow: none;
+	}
+	& .toolbar-title {
+		text-align: center;
+		color: #ffffff;
+		font-size: 20px;
+		line-height: 25px;
+		font-weight: 600;
+		padding-top: 20px;
+	}
+	& .bar-buttons{
+		padding-top: 20px;
+	}
+}
+.header {
+	&::after {
+		background: none;
+	}
+}

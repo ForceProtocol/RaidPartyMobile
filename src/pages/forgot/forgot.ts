@@ -32,6 +32,7 @@ export class ForgotPage {
   goto_forgot_otp() {
     console.log(this.forgot_form.value)
     if (this.forgot_form.valid) {
+      this.SharedService.startLoading();
       this.SharedService.user_forgot_pwd({'email':this.forgot_form.value.email,'requestMethod':11}).subscribe(res => {
         console.log(res,'forgot password Api response');
         if(res['msg']){
@@ -41,6 +42,7 @@ export class ForgotPage {
         console.log(err);
         this.SharedService.showToast(err['err']);
       })
+      this.SharedService.hideLoading();
     }
     // this.navCtrl.push('OtpForgotPage')
   }

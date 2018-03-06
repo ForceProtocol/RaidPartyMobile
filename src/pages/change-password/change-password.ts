@@ -44,6 +44,7 @@ export class ChangePasswordPage {
         } else {
           // if All data Valid then Api call
           if (this.change_password.valid) {
+            this.SharedService.startLoading();
             var param = {
               'password': this.change_password.value.current_pwd,
               'newPassword': this.change_password.value.new_password
@@ -53,12 +54,14 @@ export class ChangePasswordPage {
               if (res['success'] == true) {
                 this.SharedService.showToast('Password change successfuly');
                 this.storage.set('pwd', this.change_password.value.new_password);
+                this.navCtrl.push('DashboardPage');
               } else {
                 this.SharedService.showToast('Invalid');
               }
             }, err => {
               this.SharedService.showToast(err.error.err);
             })
+            this.SharedService.hideLoading();
           }
         }
       }

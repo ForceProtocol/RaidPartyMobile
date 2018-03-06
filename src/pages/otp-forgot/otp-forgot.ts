@@ -38,6 +38,7 @@ export class OtpForgotPage {
   }
   goto_reset() {
     if(this.otpForm.valid){
+      this.shared.startLoading();
       var param = { 'pin': this.otpForm.value.PIN, 'pinFor': 'password-reset' }
       this.shared.user_varifyOtp(param).subscribe(res=>{
         console.log(res,'forgot password pin ');
@@ -47,6 +48,7 @@ export class OtpForgotPage {
           this.shared.showToast('Please enter Valid otp')
         }
       })
+      this.shared.hideLoading();
     }
     
     

@@ -43,11 +43,16 @@ export class ResetPage {
       }
       this.shared.user_reset_password(param).subscribe(res => {
         console.log(res,'reset password');
+        if(res['success'] == true){
+            this.shared.showToast(res['msg']);
+            this.navCtrl.push('LoginPage');
+            // this.storage.set('pwd',this.forgot_form.value.pwd);
+            // this.storage.set('user',res)
+        }
       }, err => {
-        console.log(err);
+       this.shared.showToast(err.error.err);
       })
-    }
-    this.navCtrl.push('DashboardPage')
+    }    
   }
   goto_otp_forgot() {
     this.navCtrl.push('OtpForgotPage')

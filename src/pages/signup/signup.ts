@@ -49,9 +49,11 @@ export class SignupPage {
         if(res['success']== true){             
           this.storage.set('pwd',this.SignupForm.value.pwd);               
           this.navCtrl.push('OtpPage',param);
-        }
-        this.shared.hideLoading();
+        }        
+      },err=>{
+        this.shared.showToast(err.error.err);
       })
+      this.shared.hideLoading();
     }
   }  
 

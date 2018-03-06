@@ -43,6 +43,7 @@ p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !importa
 	border: 2px solid #FDFDFD;
 	border-radius: 27px;
 	width: 100%;
+	background: none;
 	letter-spacing: 1px;
 	transition: all 0.3s ease-in-out;
 	-moz-transition: all 0.3s ease-in-out;
@@ -196,6 +197,13 @@ p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !importa
 	}
 }
 .toolbar {
+	padding: 5px 4px;
+	& .title{
+		padding-top: 0 !important;
+	}
+	& ion-title.title{
+		padding: 0 10px 1px;
+	}
 	& .toolbar-background {
 		background: transparent;
 		border: none;

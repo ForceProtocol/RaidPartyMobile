@@ -25,9 +25,10 @@ export class DashboardPage {
       this.shared.user_dashboard().subscribe(res => {
         console.log(res,'dashboard data');
         if(res['success']== true){          
-            this.ForceTotal = res['totalForce'];
-            this.totalForceUSD = res['totalForceUSD'];
-            this.Address = res['wallets'][0].address;
+            this.ForceTotal = res['player'].totalForce;
+            this.ForceTotal = parseFloat(this.ForceTotal).toFixed(2);
+            this.totalForceUSD = res['player'].totalForceUSD;
+            this.Address = res['player'].playerId;
         }
         console.log(this.ForceTotal , this.totalForceUSD , this.Address)
       })

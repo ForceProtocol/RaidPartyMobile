@@ -44,18 +44,13 @@ export class OtpPage {
       var param = { 'pin': this.otpForm.value.otp, 'email': this.navParams.get('email') }
       this.shared.user_Otp(param).subscribe(res => {
         if (res['success'] == true) {
-          this.shared.user_login({'email':this.navParams.get('email'),'password':this.navParams.get('password')}).subscribe(res => {
-            if (res['success'] == true) {
-              this.shared.user = res['user'];
-              this.storage.set('pwd', this.navParams.get('password'));
-              this.storage.set('user', res).then(res => {
-                console.log(res, 'user save in local')
-              })
-              this.navCtrl.push('DashboardPage');
-            } else {
-              this.shared.showToast('Invalid Email or password to provided');
-            }
+          // {'email':this.navParams.get('email'),'password':this.navParams.get('password')}
+          this.shared.user = res['player'];
+          this.storage.set('pwd', this.navParams.get('password'));
+          this.storage.set('user', res).then(res => {
+            console.log(res, 'user save in local')
           })
+          this.navCtrl.push('DashboardPage');          
         } else {
           this.shared.showToast('Please enter valid otp');
         }

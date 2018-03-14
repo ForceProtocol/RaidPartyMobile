@@ -46,8 +46,8 @@ export class ChangePasswordPage {
           if (this.change_password.valid) {
             this.SharedService.startLoading();
             var param = {
-              'password': this.change_password.value.current_pwd,
-              'newPassword': this.change_password.value.new_password
+              'current_password': this.change_password.value.current_pwd,
+              'new_password': this.change_password.value.new_password
             }
             this.SharedService.user_changePassword(param).subscribe(res => {
               console.log(res, 'change password');

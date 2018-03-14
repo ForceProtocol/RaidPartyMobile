@@ -16,7 +16,7 @@ export class SharedService {
     baseUrl: string;
     user: any;
     constructor(public http: HttpClient, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public storage: Storage, private Network: Network) {
-        this.baseUrl = 'https://hub.triforcetokens.io/beta/user/';
+        this.baseUrl = 'https://hub.raidparty.io/mob/player/';
         this.getHeaders();
     }
 
@@ -87,26 +87,27 @@ export class SharedService {
 
     // Forgot password Api
     user_forgot_pwd(data) {
-        return this.http.post(`${this.baseUrl}forgot-password`, this.formData(data), this.reqOptions);
+        return this.http.post(`${this.baseUrl}reset-password`, this.formData(data), this.reqOptions);
     }
 
     // Get user wallets
     user_dashboard() {
-        return this.http.get(`${this.baseUrl}wallets`, this.reqOptions);
+        return this.http.get(`${this.baseUrl}dashboard`, this.reqOptions);
     }
 
+    // Reset password Api
     user_reset_password(data) {
-        return this.http.post(`${this.baseUrl}update-passwordc`, this.formData(data), this.reqOptions);
+        return this.http.post(`${this.baseUrl}change-password`, this.formData(data), this.reqOptions);
     }
 
     // From Forgot password Otp verify
     user_varifyOtp(data) {
-        return this.http.post('https://hub.triforcetokens.io/beta/util/validate-pin', this.formData(data), this.reqOptions);
+        return this.http.post(`${this.baseUrl}validate-pin`, this.formData(data), this.reqOptions);
     }
 
     // Signup otp verify
     user_Otp(data) {
-        return this.http.get(`${this.baseUrl}activatec?pin=` + data.pin + '&email=' + data.email, this.reqOptions);
+        return this.http.post(`${this.baseUrl}activate`,this.formData(data), this.reqOptions);
     }
 
     resend() {
@@ -115,6 +116,6 @@ export class SharedService {
 
     // Change password Api
     user_changePassword(data) {
-        return this.http.post(`${this.baseUrl}change-password`, this.formData(data), this.reqOptions);
+        return this.http.post(`${this.baseUrl}update-password`, this.formData(data), this.reqOptions);
     }
 }

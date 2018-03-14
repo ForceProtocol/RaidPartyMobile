@@ -35,6 +35,10 @@ export class ResetPage {
     console.log('ionViewDidLoad ResetPage',this.shared.user.email);
   }
   goto_dashboard() {
+    if(this.forgot_form.value.pwd != this.forgot_form.value.cpd){
+      this.shared.showToast('password and Confirm password not match');
+      return false;
+    }
     if (this.forgot_form.valid) {
       var param = {
         'email':this.navParams.get('email'),
@@ -45,9 +49,7 @@ export class ResetPage {
         console.log(res,'reset password');
         if(res['success'] == true){
             this.shared.showToast(res['msg']);
-            this.navCtrl.push('LoginPage');
-            // this.storage.set('pwd',this.forgot_form.value.pwd);
-            // this.storage.set('user',res)
+            this.navCtrl.push('LoginPage');           
         }
       }, err => {
        this.shared.showToast(err.error.err);

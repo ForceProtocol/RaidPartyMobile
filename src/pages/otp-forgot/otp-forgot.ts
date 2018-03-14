@@ -29,7 +29,6 @@ export class OtpForgotPage {
       }
     })
   }
-
   ionViewDidLoad() {
     console.log('ionViewDidLoad OtpForgotPage');
   }
@@ -39,14 +38,16 @@ export class OtpForgotPage {
   goto_reset() {
     if(this.otpForm.valid){
       this.shared.startLoading();
-      var param = { 'pin': this.otpForm.value.PIN, 'pinFor': 'password-reset' }
+      var param = { 'pin': this.otpForm.value.PIN, 'email': this.navParams.get('email') }
       this.shared.user_varifyOtp(param).subscribe(res=>{
         console.log(res,'forgot password pin ');
-        if(res['isValid'] == true){
+        if(res['success'] == true){
           this.navCtrl.push('ResetPage',{'pin':this.otpForm.value.PIN,'email':this.navParams.get('email')})
         }else{
           this.shared.showToast('Please enter Valid otp')
         }
+      },err=>{
+        this.shared.showToast(err.error.err);
       })
       this.shared.hideLoading();
     }

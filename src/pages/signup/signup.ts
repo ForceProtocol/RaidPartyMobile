@@ -52,14 +52,15 @@ export class SignupPage {
         if (res != null) {
           this.deviceId = res
         }
-        var param = { 'email': this.SignupForm.value.email, 'password': this.SignupForm.value.pwd, 'device_id': this.deviceId, 'device_type': this.Isplatform };
-
+        // var param = { 'email': this.SignupForm.value.email, 'password': this.SignupForm.value.pwd, 'device_id': this.deviceId, 'device_type': this.Isplatform };
+        var param = { 'email': this.SignupForm.value.email, 'password': this.SignupForm.value.pwd,'device_type': this.Isplatform };
         this.shared.startLoading();
 
         this.shared.user_signUp(param).subscribe(res => {
           if (res['success'] == true) {
             this.storage.set('pwd', this.SignupForm.value.pwd);
             this.navCtrl.push('OtpPage', param);
+            this.storage.set('SignupData', param)
           }
           else {
             console.log(res)

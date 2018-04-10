@@ -30,6 +30,8 @@ p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !importa
 	background: -webkit-linear-gradient(-45deg, #3f7071 0%,#064852 100%);
 	background: linear-gradient(135deg, #3f7071 0%,#064852 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f7071', endColorstr='#064852',GradientType=1 );}
+.clear { clear: both; }
+.has-refresher > .scroll-content { border: none; }
 
 @mixin btn_style(){
 	font-family: "Montserrat";
@@ -137,7 +139,8 @@ p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !importa
 			}
 		}
 		
-		&.ng-valid {
+		&.ng-valid.input-has-value {
+			box-shadow: none !important;
 			& .item-inner{
 				box-shadow: none !important;
 			}
@@ -216,6 +219,15 @@ p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !importa
 		line-height: 25px;
 		font-weight: 600;
 		padding-top: 20px;
+		white-space: normal;
+		position: relative;
+		& .earned-rewards{
+			font-size: 16px;
+			mix-blend-mode: screen;
+			position: absolute;
+			right: 0;
+			opacity: 0.35;
+		}
 	}
 	& .bar-buttons{
 		padding-top: 20px;
@@ -224,5 +236,222 @@ p 				{ font-weight: 300; font-size: 14px !important; line-height: 19px !importa
 .header {
 	&::after {
 		background: none;
+	}
+}
+.tabs {
+	& .tabbar {
+		background: #082C32;
+		& .tab-button:hover{
+			opacity: 1;
+		}
+		& .tab-button-icon{
+			font-size: initial;
+			min-width: initial;
+		}
+		& .tab-button-icon::before{
+			content: "";
+			width: 28px;
+			height: 28px;
+			background-position: top left;
+			background-repeat: no-repeat;
+		}
+		& .tab-button-icon[ng-reflect-name=home]{
+			background-image: url('../assets/imgs/home-sprite.png');
+		}
+		& .tab-button-icon[ng-reflect-name=game-controller-a]{
+			background-image: url('../assets/imgs/games-sprite.png');
+		}
+		& .tab-button-icon[ng-reflect-name=cash]{
+			background-image: url('../assets/imgs/reward-sprite.png');
+		}
+		& a[aria-selected=true]{
+			& .tab-button-icon[ng-reflect-name=home]{
+				background-position: bottom left;
+			}
+			& .tab-button-icon[ng-reflect-name=game-controller-a]{
+				background-position: bottom left;
+			}
+			& .tab-button-icon[ng-reflect-name=cash]{
+				background-position: bottom left;
+			}
+		}
+		
+	}
+	& .tab-button[aria-selected="true"]{
+		color: #fff;
+		& .tab-button-text{
+			color: #fff;
+			mix-blend-mode: normal;
+		}
+	}
+	& .tab-button-text{
+		color: #787878;
+		mix-blend-mode: screen;
+	}
+}
+.card {
+	border-radius: 16px;
+	box-shadow: 0 2px 18px rgba(0,0,0,0.22);
+	margin: 0 0 24px;
+	width: 100%;
+	overflow: visible;
+	& > img{
+		border-radius: 15px 15px 0 0;
+	}
+	& .card-content {
+		padding: 14px 16px;
+		& .price-earned {
+			background-color: #FFCA5D;
+			color: #ffffff;
+			padding: 16px 16px 16px 70px;
+			&::before {
+		    background-image: url("../assets/imgs/prize-earned-before.png");
+		   }
+		   &::after {
+		    background-image: url("../assets/imgs/prize-earned-after.png");
+		   }
+		   & img {
+		   	width: auto;
+			display: inline-block;
+			vertical-align: middle;
+			position: absolute;
+			z-index: 1;
+			top: -14px;
+			left: 0px;
+		   }
+		}
+		& .price-redeemed {
+			background-color: #EDEFF2;
+			color: #9A9A9A;
+			&::before {
+		    background-image: url("../assets/imgs/prize-redeemed-before.png");
+		   }
+		   &::after {
+		    background-image: url("../assets/imgs/prize-redeemed-after.png");
+		   }
+		   & img {
+		   	width: auto;
+			display: inline-block;
+			vertical-align: middle;
+			position: absolute;
+			z-index: 1;
+			top: -14px;
+			left: 0px;
+		   }
+		}
+		& .card-header{
+			margin: -16px -24px 0;
+			overflow: visible;
+			white-space: normal;
+			text-overflow: inherit;
+			font-size: 16px;
+			letter-spacing: 0.4px;
+			line-height: 20px;
+			font-weight: 400;
+			position: relative;
+			& span{
+				font-weight: 700;
+			}
+			&::before {
+				left: 0;
+			}
+			&::after {
+				right: 0;
+			}
+			&::before, &::after {
+		    content: "";
+		    height: 9px;
+		    width: 9px;
+		    display: block;
+		    background-repeat: no-repeat;
+		    position: absolute;
+			bottom: -9px;
+		   }
+		}
+		& .card-title{
+			padding: 0;
+			margin-bottom: 8px;
+			font-size: 24px;
+			line-height: 35px;
+			letter-spacing: 0.67px;
+		}
+		& .list:not(.common-btns){
+			& .item{
+				display: inline-block;
+				vertical-align: middle;
+				width: auto;
+				min-height: inherit;
+				& .item-inner {
+					display: inline-block;
+					& .label{
+						margin: 0;
+						font-size: 16px;
+						font-weight: 400;
+						color: #AFAFAF;
+						line-height: 25px;
+						letter-spacing: 0.47px;
+					}
+				}
+			}
+			& .item:first-child {
+				margin-right: 5px;
+			}
+			& .item:last-child {
+				& .label{
+					color: #548185;
+					font-weight: 600;
+				}
+			}
+		}
+	}
+	& .common-btns{
+		& .label{
+			padding: 0;
+		}
+		& .item-button.button-outline{
+			color: #548185;
+			border-color: #548185;
+			margin-bottom: 0;
+		}
+		& .item-button.button-outline:hover{
+			background-color: #548185;
+			color: #ffffff;
+		}
+	}
+}
+.earned-rewards-list {
+	& .row{
+		margin-bottom: 15px;
+		border-radius: 8px;
+		background-color: #ffffff;
+		box-shadow: 0 2px 18px rgba(0,0,0,0.22);
+		& .force-points {
+			font-size: 32px;
+			line-height: 35px;
+			color: #548185;
+			text-align: center;
+			font-weight: 300;
+			padding: 16px 10px;
+			border-right: 2px solid #F8F8F8;
+			& span
+			{
+				font-size: 16px;
+				line-height: 24px;
+				font-weight: 600;
+			}
+		}
+		& .force-desc{
+			padding: 16px 10px;
+			& .title{
+				color: #4A4A4A;
+				font-weight: 600;
+				font-size: 18px;
+				line-height: 25px;
+			}
+			& p{
+				color: #AFAFAF !important;
+				margin: 5px 0 0;
+			}
+		}
 	}
 }

@@ -5,8 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
-import { UniqueDeviceID } from '@ionic-native/unique-device-id';
-import { Network } from '@ionic-native/network';
+// import { UniqueDeviceID } from '@ionic-native/unique-device-id';
+
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -25,9 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,   
   ],
   providers: [
-    StatusBar,    
-    Network,
-    UniqueDeviceID,
+    StatusBar,
+    // UniqueDeviceID,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

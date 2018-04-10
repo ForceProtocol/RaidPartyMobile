@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { ToastController, LoadingController, Events, Platform } from 'ionic-angular';
+import { ToastController, LoadingController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
-import { Network } from '@ionic-native/network';
+
 
 
 @Injectable()
@@ -15,8 +15,9 @@ export class SharedService {
     Uuid: any;
     baseUrl: string;
     user: any;
-    constructor(public http: HttpClient, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public storage: Storage, private Network: Network) {
-        this.baseUrl = 'https://hub.raidparty.io/mob/player/';
+    constructor(public http: HttpClient, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public storage: Storage) {
+        this.baseUrl = 'http://staging.hub.raidparty.io/mob/player/';
+        // this.baseUrl = 'https://hub.raidparty.io/mob/player/';
         this.getHeaders();
     }
 
@@ -26,7 +27,6 @@ export class SharedService {
             spinner: 'dots'
         });
         this.loading.present();
-
     }
 
     /** hide Loading */
@@ -39,7 +39,7 @@ export class SharedService {
     showToast(message: string) {
         let toast = this.toastCtrl.create({
             message: message,
-            duration: 5000,
+            duration: 3000,
             position: 'bottom'
         });
         toast.present(toast);
@@ -64,6 +64,7 @@ export class SharedService {
                     })
 
                 }
+                console.log(this.reqOptions)
                 resolve(this.reqOptions);
             });
         });
@@ -107,7 +108,7 @@ export class SharedService {
 
     // Signup otp verify
     user_Otp(data) {
-        return this.http.post(`${this.baseUrl}activate`,this.formData(data), this.reqOptions);
+        return this.http.post(`${this.baseUrl}activate`, this.formData(data), this.reqOptions);
     }
 
     resend() {
@@ -117,5 +118,17 @@ export class SharedService {
     // Change password Api
     user_changePassword(data) {
         return this.http.post(`${this.baseUrl}update-password`, this.formData(data), this.reqOptions);
+    }
+
+    GameList(data) {
+        return this.http.get(`${this.baseUrl}games?device_type=` + data, this.reqOptions);
+    }
+
+    getcode(){
+        return this.http.get('https://raidpartymobile.docs.apiary.io/#reference/0/authenticated-routes/get-game-code/mob/player/game/code',this.reqOptions);
+    }
+
+    GameReward(){
+        return this.http.get(`${this.baseUrl}rewards`, this.reqOptions);
     }
 }

@@ -22,8 +22,6 @@ export class OtpPage {
     this.otpForm = formBuilder.group({
       otp: ['', Validators.compose([Validators.required, Validators.pattern(/[0-9]{1,3}/)])]
     });
-
-    console.log(this.navParams.get('email'));
     this.storage.get('pwd').then(res => {
       if (res != null) {
         this.tmpCode = res
@@ -40,33 +38,37 @@ export class OtpPage {
   goto_dashboard() {
     this.otpForm.submitted = true
     if (this.otpForm.valid) {
-      this.shared.startLoading();
-      var param = { 'pin': this.otpForm.value.otp, 'email': this.navParams.get('email') }
-      this.shared.user_Otp(param).subscribe(res => {
-        if (res['success'] == true) {
-          // {'email':this.navParams.get('email'),'password':this.navParams.get('password')}
-          this.shared.user = res['player'];
-          this.storage.set('pwd', this.navParams.get('password'));
-          this.storage.set('user', res).then(res => {
-            console.log(res, 'user save in local')
+
+      this.storage.get('SignupData').then(res => {
+        if (res != null) {
+          console.log(res)
+          this.shared.startLoading();
+          var param = { 'pin': this.otpForm.value.otp, 'email': res.email }
+          this.shared.user_Otp(param).subscribe(res => {
+            if (res['success'] == true) {
+              this.storage.remove('SignupData');
+              this.shared.user = res['player'];
+              this.storage.set('pwd', this.navParams.get('password'));
+              this.storage.set('user', res).then(res => {
+                console.log(res, 'user save in local')
+              })
+              this.navCtrl.push('TabsPage');
+            } else {
+              this.shared.showToast('Please enter valid otp');
+            }
+          }, err => {
+            console.log(err);           
+            this.shared.showToast(err.error.err);
           })
-          this.navCtrl.push('DashboardPage');          
-        } else {
-          this.shared.showToast('Please enter valid otp');
+          this.shared.hideLoading();
         }
-      }, err => {
-        console.log(err);
-        this.shared.showToast(err.error.err);
       })
-      this.shared.hideLoading();
+
     }
   }
 
   resendOTP() {
     console.log('resend call');
     this.shared.showToast('under the Development');
-    // this.shared.resend().subscribe(res=>{
-    //   console.log(res);
-    // })
   }
 }

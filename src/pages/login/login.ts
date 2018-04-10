@@ -42,7 +42,7 @@ export class LoginPage {
           this.storage.set('user', res).then(res => {
             console.log(res, 'user save in local')
           })          
-          this.navCtrl.push('DashboardPage');          
+          this.navCtrl.push('TabsPage');          
         } else {
           this.SharedService.showToast('Invalid Email or password to provided');
         }

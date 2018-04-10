@@ -16,6 +16,7 @@ import { Storage } from '@ionic/storage';
   templateUrl: 'change-password.html',
 })
 export class ChangePasswordPage {
+  tabBarElement: any;
   change_password: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public storage: Storage, public formbuilder: FormBuilder, public SharedService: SharedService) {
     this.change_password = this.formbuilder.group({
@@ -27,6 +28,10 @@ export class ChangePasswordPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ChangePasswordPage');
+    this.tabBarElement = document.querySelector('.tabbar');
+    if (this.tabBarElement != null) {
+      this.tabBarElement.style.display = 'none';
+    }
   }
   change_pwd() {
     console.log(this.change_password.value);
@@ -54,7 +59,8 @@ export class ChangePasswordPage {
               if (res['success'] == true) {
                 this.SharedService.showToast('Password change successfuly');
                 this.storage.set('pwd', this.change_password.value.new_password);
-                this.navCtrl.push('DashboardPage');
+                // this.navCtrl.push('DashboardPage');
+                this.navCtrl.pop();
               } else {
                 this.SharedService.showToast('Invalid');
               }
@@ -69,6 +75,13 @@ export class ChangePasswordPage {
 
   }
   goto_dashboard() {
-    this.navCtrl.push('DashboardPage')
+    // this.navCtrl.push('DashboardPage')
+    this.navCtrl.pop();
+  }
+
+  ionViewWillLeave() {
+    if (this.tabBarElement != null) {
+      this.tabBarElement.style.display = '-webkit-box';
+    }
   }
 }

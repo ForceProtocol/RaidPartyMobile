@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar hideBackButton>
-    <ion-title>Dashboard</ion-title>
+    <ion-title>{{'Dashboard' | translate}}</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)='presentActionSheet()' >
         <img src="assets/imgs/menu.png" alt="menu">
@@ -24,25 +24,24 @@
   <ion-item class="force-block">
   		<ion-card>			
 		  <ion-card-content>
-		    	<p class="balance-text">Balance</p>
+		    	<p class="balance-text">{{'Balance' | translate}}</p>
 		    	<div class="force-details">
 		    		<div class="total">
 		    			<p>
-		    				<span>{{ForceTotal}}</span> Force
+		    				<span>{{ForceTotal}}</span> {{'Force' | translate}}
 		    			</p>
 		    		</div>
 		    		<div class="balance">
-		    			<p>{{totalForceUSD}} USD</p>
+		    			<p>{{totalForceUSD}} {{'USD' | translate}}</p>
 		    		</div>
 		    	</div>	
 		  </ion-card-content>
 
 		</ion-card>
   </ion-item>
-  <ion-item class="deposit">
-  		<p>
-  			<!-- <span>Deposit Currency Address</span> -->
+  <!-- <ion-item class="deposit">
+  		<p>  		
   			{{Address}}
   		</p>
-  </ion-item>
+  </ion-item> -->
 </ion-content>

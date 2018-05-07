@@ -11,29 +11,29 @@
 	<form [formGroup]="SignupForm" #f="ngForm" (ngSubmit)='Register()' novalidate>
 		<ion-list class="form-inputs">
 			<ion-item class="email-input">
-				<ion-input type="email" placeholder="Email" formControlName='email'></ion-input>
+				<ion-input type="email" placeholder="{{'Email' | translate}}" formControlName='email'></ion-input>
 			</ion-item>
 			<!-- <div *ngIf="f.submitted && SignupForm.controls.email.errors?.pattern">Please enter valid email address</div>
 			<div *ngIf="f.submitted && SignupForm.controls.email.errors?.required">Please enter valid email address</div> -->
 			<ion-item class="pwd-input">
-				<ion-input type="password" placeholder="Password" formControlName='pwd'></ion-input>
+				<ion-input type="password" placeholder="{{'Password' | translate}}" formControlName='pwd'></ion-input>
 			</ion-item>
 			<!-- <div *ngIf="f.submitted && SignupForm.controls.pwd.errors?.required">Please enter password</div> -->
 			<ion-item class="pwd-input">
-				<ion-input type="password" placeholder="Confirm Password" formControlName='cp'></ion-input>
+				<ion-input type="password" placeholder="{{'Confirm password' | translate}}" formControlName='cp'></ion-input>
 			</ion-item>
 			<!-- <div *ngIf="f.submitted && SignupForm.controls.cp.errors?.required">Please enter valid email address</div> -->
 		</ion-list>
 
 		<ion-list class="common-btns">
 			<ion-item>
-				<button ion-button outline [disabled]='SignupForm.invalid'>Next</button>
+				<button ion-button outline [disabled]='SignupForm.invalid'>{{'Next' | translate}}</button>
 			</ion-item>	
 	 </ion-list>
 	</form>
 	<ion-item class="other-links">
 		<div class="new-user">
-			<p>Already have an account? <button ion-button outline clear (click)="login()"><b>Login</b></button>
+			<p>{{'Already have an account' | translate}}? <button ion-button outline clear (click)="login()"><b>{{'Login' | translate}}</b></button>
 		</div>
 </ion-item>
 

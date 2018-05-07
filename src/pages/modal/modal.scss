@@ -1,0 +1,16 @@
+page-modal {
+  	&.ion-page {
+  		background: transparent;
+  		display: flex;
+  		justify-content: center;
+  	}
+  	& .content {
+  		overflow-y: scroll;
+  		align-self: center;
+  		position: relative;
+  		top: inherit;
+  		left: inherit;
+  		bottom: inherit;
+  		right: inherit;
+  	}
+}

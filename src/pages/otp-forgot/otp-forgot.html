@@ -9,12 +9,12 @@
 		<img src="assets/imgs/logo.png" alt="logo">
 	</ion-item>
 	<ion-item class="text">
-		<p>A 6 digit PIN has been mailed to your mailing address. Please enter OTP to reset your password.</p>
+		<p>{{'A 6 digit PIN has been mailed to your mailing address' | translate}}. {{'Please enter PIN to reset your password' | translate}}.</p>
 	</ion-item>
 	<form [formGroup]="otpForm" #f="ngForm" novalidate>
 		<ion-list class="form-inputs">
 			<ion-item class="pin-input">
-				<ion-input type="text" placeholder="PIN" formControlName='PIN'></ion-input>
+				<ion-input type="text" placeholder="{{'PIN' | translate}}" formControlName='PIN'></ion-input>
 				<!-- <div *ngIf="f.submitted && otpForm.controls.PIN.errors?.pattern">Please enter valid PIN</div>
 				<div *ngIf="f.submitted && otpForm.controls.PIN.errors?.required">Please enter valid PIN</div> -->
 			</ion-item>
@@ -22,16 +22,16 @@
 	</form>
 	<ion-list class="common-btns">
 		<ion-item>
-			<button ion-button outline (click)='goto_reset()' [disabled]='otpForm.invalid'>NEXT</button>
+			<button ion-button outline (click)='goto_reset()' [disabled]='otpForm.invalid'>{{'NEXT' | translate}}</button>
 		</ion-item>
 		<ion-item>
-			<button ion-button outline (click)='goto_forgot()'>BACK</button>
+			<button ion-button outline (click)='goto_forgot()'>{{'BACK' | translate}}</button>
 		</ion-item>
 	</ion-list>
 	<ion-item class="other-links">
 		<div class="resend-otp">
 			<button ion-button outline clear (click)='resendOTP()'>
-				<b>Resend PIN</b>
+				<b>{{'Resend PIN' | translate}}</b>
 			</button>
 		</div>
 	</ion-item>

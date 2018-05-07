@@ -9,12 +9,12 @@
 		<img src="assets/imgs/logo.png" alt="logo">
 	</ion-item>
 	<ion-item class="text">
-		<p>A 6 digit PIN has been mailed to your mailing address. Please enter OTP to complete the registration.</p>
+		<p>{{'A 6 digit PIN has been mailed to your mailing address' | translate}}. {{'Please enter PIN to complete the registration' | translate}}.</p>
 	</ion-item>
 	<form [formGroup]="otpForm" #f="ngForm" novalidate>
 		<ion-list class="form-inputs">
 			<ion-item class="pin-input">
-				<ion-input type="text" placeholder="PIN" formControlName='otp'></ion-input>
+				<ion-input type="text" placeholder="{{'PIN' | translate}}" formControlName='otp'></ion-input>
 			</ion-item>
 			<!-- <div *ngIf="f.submitted && otpForm.controls.otp.errors?.pattern">Please enter valid otp address</div>
 			<div *ngIf="f.submitted && otpForm.controls.otp.errors?.required">Please enter valid otp address</div> -->
@@ -22,16 +22,16 @@
 	</form>
 	<ion-list class="common-btns">
 		<ion-item>
-			<button ion-button outline (click)='goto_dashboard()' [disabled]='otpForm.invalid'>SUBMIT</button>
+			<button ion-button outline (click)='goto_dashboard()' [disabled]='otpForm.invalid'>{{'SUBMIT' | translate}}</button>
 		</ion-item>
 		<ion-item>
-			<button ion-button outline (click)='goto_create()'>BACK</button>
+			<button ion-button outline (click)='goto_create()'>{{'BACK' | translate}}</button>
 		</ion-item>
 	</ion-list>
 	<ion-item class="other-links">
 		<div class="resend-otp">
 			<button ion-button outline clear (click)='resendOTP()'>
-				<b>Resend PIN</b>
+				<b>{{'Resend PIN' | translate}}</b>
 			</button>
 		</div>
 	</ion-item>

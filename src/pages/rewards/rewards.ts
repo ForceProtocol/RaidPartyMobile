@@ -53,7 +53,9 @@ export class RewardsPage {
   }
 
   getReward(){
+    this.shared.startLoading()
     this.shared.GameReward().subscribe(res=>{
+      this.shared.hideLoading()
       if(res['rewards'].length != 0){
         this.rewards = res['rewards'];            
       }

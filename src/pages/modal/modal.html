@@ -1,0 +1,82 @@
+<!--
+  Generated template for the ModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content padding>
+	<button ion-button class="close"><img src="assets/imgs/close.svg" alt="close" (click)='close()'></button>
+	<ion-list class="modal">
+		<ion-item class="alert-title">
+			<!-- DOTA 2 -->
+			{{games.title}}
+		</ion-item>
+		<ion-item class="alert-sub-title">
+			{{'PRIZES' | translate}}
+		</ion-item>
+		<ion-item  [class]="className" *ngFor='let prize of games.prizes'>
+			<ion-grid>
+				<ion-row class="ac-header">
+					<ion-item class="check" >
+						<ion-checkbox color="dark" (ionChange)='test($event)' [class]='checkboxClass'></ion-checkbox>
+					</ion-item>
+					<ion-col col-7 class="title">
+						{{prize.value}} {{prize.currency}}
+					</ion-col>
+					<ion-col col-5 class="rules">
+						{{'Rules' | translate}}<img src="assets/imgs/down-arrow.svg" alt="arrow">
+					</ion-col>
+				</ion-row>
+				<ion-row class="ac-detail">
+					<p [innerHtml]='prize.rules'></p>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+		<!-- <ion-item class="prize-list">
+			<ion-grid>
+				<ion-row class="ac-header">
+					<ion-item class="check">
+						<ion-checkbox color="dark" checked="true"></ion-checkbox>
+					</ion-item>
+					<ion-col col-7 class="title">
+						10 ETH
+					</ion-col>
+					<ion-col col-5 class="rules">
+						Rules<img src="assets/imgs/down-arrow.svg" alt="arrow">
+					</ion-col>
+				</ion-row>
+				<ion-row class="ac-detail">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				</ion-row>
+			</ion-grid>
+		</ion-item>
+		<ion-item class="prize-list">
+			<ion-grid>
+				<ion-row class="ac-header">
+					<ion-item class="check" >
+						<ion-checkbox color="dark" checked="true"></ion-checkbox>
+					</ion-item>
+					<ion-col col-7 class="title">
+						10 ETH
+					</ion-col>
+					<ion-col col-5 class="rules">
+						Rules<img src="assets/imgs/down-arrow.svg" alt="arrow">
+					</ion-col>
+				</ion-row>
+				<ion-row class="ac-detail">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				</ion-row>
+			</ion-grid>
+		</ion-item> -->
+		<ion-item *ngIf='games != undefined'>
+			<ion-list class="common-btns">
+				<ion-item>
+					<button ion-button outline (click)="close()">{{'Close' | translate}}</button>
+				</ion-item>
+				<ion-item>
+					<button ion-button outline (click)='play(games.link)'>{{'Play Now' | translate}}</button>
+				</ion-item>
+			</ion-list>
+		</ion-item>
+	</ion-list>
+</ion-content>

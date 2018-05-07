@@ -7,8 +7,8 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Force Earned
-      <span class="earned-rewards">1200Cr</span>
+    <ion-title>{{'Force Earned' | translate}}
+      <!-- <span class="earned-rewards">1200Cr</span> -->
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)='presentActionSheet()'>
@@ -28,7 +28,7 @@
   <ion-grid class="earned-rewards-list" *ngIf='rewards != ""'>
     <ion-row *ngFor='let one of rewards'>
       <ion-col col-4 class="force-points">{{one.amount}}
-        <span>FORCE</span>
+        <span>{{'FORCE' | translate}}</span>
       </ion-col>
       <ion-col col-8 class="force-desc">
         <span class="title">
@@ -63,6 +63,6 @@
   </ion-row> -->
   </ion-grid>
   <ion-row *ngIf='rewards == ""'>
-    <h4 cente>No Rewards</h4>
+    <h4 cente>{{'No Rewards' | translate}}</h4>
   </ion-row>
 </ion-content>

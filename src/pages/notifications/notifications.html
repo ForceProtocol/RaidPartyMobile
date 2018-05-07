@@ -1,0 +1,59 @@
+<!--
+  Generated template for the NotificationsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>{{'Notifications' | translate}}</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only (click)='presentActionSheet()'>
+				<img src="assets/imgs/menu.png" alt="menu">
+			</button>
+		</ion-buttons>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-refresher (ionRefresh)="doRefresh($event)">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+		</ion-refresher-content>
+	</ion-refresher>
+	<ion-list class="notifications-list">
+		<ion-item-sliding *ngFor='let one of notification; let i = index;'>
+			<ion-item *ngIf='!one.undo'>
+				<ion-grid>
+					<ion-row>
+						<ion-col col-9 class="title">
+							<!-- Title for the notification -->
+							{{one.title}}
+						</ion-col>
+						<ion-col col-3 class="duration">
+							<!-- 10 mins -->
+							{{convertTime(one.createdAt)}}
+						</ion-col>
+					</ion-row>
+					<ion-row>
+						<ion-col class="detail">
+							<!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit. -->
+							{{one.message}}
+						</ion-col>
+					</ion-row>
+				</ion-grid>
+			</ion-item>
+			<ion-item *ngIf='one.undo' (click)='undo(i)' class="delete-text">
+				<p>{{'Notification deleted' | translate}}.</p>
+				<a (click)='undo(i)'>
+					<img src="assets/imgs/undo.svg" alt="undo">{{'Undo' | translate}}</a>
+			</ion-item>
+			<ion-item-options side="right" (ionSwipe)="RemoveItem(i)">
+				<!-- <button ion-button color="danger" expandable (click)="RemoveItem(one)">Delete</button> -->
+			</ion-item-options>
+		</ion-item-sliding>
+	</ion-list>
+
+</ion-content>

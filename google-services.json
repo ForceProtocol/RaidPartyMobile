@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "898191888564",
+    "firebase_url": "https://raidparty-e924d.firebaseio.com",
+    "project_id": "raidparty-e924d",
+    "storage_bucket": "raidparty-e924d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:898191888564:android:1290e0677aaa54ba",
+        "android_client_info": {
+          "package_name": "com.app.Raidparty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "898191888564-e3bbifuor7c1fogbjgko5s7lji2uds7j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCQB4nHdFfRkuHJa499UiGeKTkIZCiycE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

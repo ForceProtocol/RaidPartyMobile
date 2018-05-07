@@ -7,7 +7,7 @@
 <ion-header>
 
 	<ion-navbar hideBackButton>
-		<ion-title>Reset Password</ion-title>
+		<ion-title>{{'Reset Password' | translate}}</ion-title>
 	</ion-navbar>
 
 </ion-header>
@@ -15,21 +15,21 @@
 	<form [formGroup]="forgot_form" #f="ngForm" novalidate>
 		<ion-list class="form-inputs">
 			<ion-item class="pwd-input">
-				<ion-input type="password" placeholder="New Password" formControlName='pwd'></ion-input>
+				<ion-input type="password" placeholder="{{'New Password' | translate}}" formControlName='pwd'></ion-input>
 			</ion-item>			
 			<!-- <div *ngIf="f.submitted && forgot_form.controls.pwd.errors?.required">Please enter Password</div> -->
 			<ion-item class="pwd-input">
-				<ion-input type="password" placeholder="Confirm New Password" formControlName='cpd'></ion-input>
+				<ion-input type="password" placeholder="{{'Confirm New Password' | translate}}" formControlName='cpd'></ion-input>
 			</ion-item>			
 			<!-- <div *ngIf="f.submitted && forgot_form.controls.cpd.errors?.required">Please enter Confirm Password</div> -->
 		</ion-list>
 	</form>
 	<ion-list class="common-btns">
 		<ion-item>
-			<button ion-button outline (click)='goto_dashboard()' [disabled] = 'forgot_form.invalid'>SUBMIT</button>
+			<button ion-button outline (click)='goto_dashboard()' [disabled] = 'forgot_form.invalid'>{{'SUBMIT' | translate}}</button>
 		</ion-item>
 		<ion-item>
-			<button ion-button outline (click)='goto_otp_forgot()'>BACK</button>
+			<button ion-button outline (click)='goto_otp_forgot()'>{{'BACK' | translate}}</button>
 		</ion-item>
 	</ion-list>
 </ion-content>

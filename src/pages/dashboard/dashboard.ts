@@ -23,7 +23,7 @@ export class DashboardPage {
   constructor(public navCtrl: NavController, public app: App, public storage: Storage, public alertCtrl: AlertController, public platform: Platform, public shared: SharedService, public navParams: NavParams, public actionSheetCtrl: ActionSheetController) {
     this.shared.getHeaders().then(res => {
       this.shared.startLoading();
-      this.shared.user_dashboard().subscribe(res => {
+      this.shared.user_dashboard({'locale':this.shared.locale}).subscribe(res => {
         console.log(res, 'dashboard data');
         if (res['success'] == true) {
           this.ForceTotal = res['player'].totalForce;
@@ -63,6 +63,9 @@ export class DashboardPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
+    this.storage.get('locale').then(res=>{
+      this.shared.locale = res
+    })
   }
   presentActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({

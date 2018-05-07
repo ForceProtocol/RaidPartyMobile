@@ -26,25 +26,35 @@ export class ChangePasswordPage {
     })
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad ChangePasswordPage');
     this.tabBarElement = document.querySelector('.tabbar');
     if (this.tabBarElement != null) {
       this.tabBarElement.style.display = 'none';
     }
+    this.storage.get('locale').then(res=>{
+      this.SharedService.locale = res
+    })
   }
   change_pwd() {
     console.log(this.change_password.value);
     if (this.change_password.value.new_password != this.change_password.value.confirm_pwd) {
       console.log('not match');
-      this.SharedService.showToast('password and Confirm password not match');
+      this.SharedService.translatelang('password and Confirm password not match').then(res=>{
+        console.log(res)
+        this.SharedService.showToast(res);
+      })
+      
       return false;
     }
     this.storage.get('pwd').then(res => {
       if (res != null) {
         // check old password with current password
         if (this.change_password.value.current_pwd != res) {
-          this.SharedService.showToast('Current password does not match');
+          this.SharedService.translatelang('Current password does not match').then(res=>{
+            this.SharedService.showToast(res);
+          })
+          
           return false;
         } else {
           // if All data Valid then Api call
@@ -52,12 +62,15 @@ export class ChangePasswordPage {
             this.SharedService.startLoading();
             var param = {
               'current_password': this.change_password.value.current_pwd,
-              'new_password': this.change_password.value.new_password
+              'new_password': this.change_password.value.new_password,
+              'locale':this.SharedService.locale
             }
             this.SharedService.user_changePassword(param).subscribe(res => {
               console.log(res, 'change password');
               if (res['success'] == true) {
-                this.SharedService.showToast('Password change successfuly');
+                this.SharedService.translatelang('Password change successfuly').then(res=>{
+                  this.SharedService.showToast(res);    
+                })              
                 this.storage.set('pwd', this.change_password.value.new_password);
                 // this.navCtrl.push('DashboardPage');
                 this.navCtrl.pop();

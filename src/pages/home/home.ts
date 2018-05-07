@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { SharedService } from '../../provider/shared-service';
 /**
  * Generated class for the HomePage page.
  *
@@ -13,9 +13,11 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html',
 })
-export class HomePage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+export class HomePage {  
+  token: any;
+  constructor(public navCtrl: NavController,public alertCtrl:AlertController,public shared:SharedService ,public navParams: NavParams) {
+    // this.token = this.shared.token 
+    
   }
 
   ionViewDidLoad() {
@@ -27,4 +29,6 @@ export class HomePage {
   GoTo_Register(){
     this.navCtrl.push('SignupPage');
   }
+  
+ 
 }

@@ -31,6 +31,9 @@ export class OtpPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OtpPage');
+    this.storage.get('locale').then(res=>{
+      this.shared.locale = res
+    })
   }
   goto_create() {
     this.navCtrl.push('SignupPage')
@@ -43,7 +46,7 @@ export class OtpPage {
         if (res != null) {
           console.log(res)
           this.shared.startLoading();
-          var param = { 'pin': this.otpForm.value.otp, 'email': res.email }
+          var param = { 'pin': this.otpForm.value.otp, 'email': res.email,'locale':this.shared.locale }
           this.shared.user_Otp(param).subscribe(res => {
             if (res['success'] == true) {
               this.storage.remove('SignupData');
@@ -54,7 +57,10 @@ export class OtpPage {
               })
               this.navCtrl.push('TabsPage');
             } else {
-              this.shared.showToast('Please enter valid otp');
+              this.shared.translatelang('Please enter Valid otp').then(res=>{
+                this.shared.showToast(res);  
+              })
+              // this.shared.showToast('Please enter valid otp');
             }
           }, err => {
             console.log(err);           

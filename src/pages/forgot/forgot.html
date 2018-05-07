@@ -9,12 +9,12 @@
 		<img src="assets/imgs/logo.png" alt="logo">
 	</ion-item>
 	<ion-item class="text">
-		<p>Enter your email address to reset your password</p>
+		<p>{{'Enter your email address to reset your password' | translate}}</p>
 	</ion-item>
 	<form [formGroup]="forgot_form" #f="ngForm" novalidate>
 		<ion-list class="form-inputs">
 			<ion-item class="email-input">
-				<ion-input type="email" placeholder="Email" formControlName = 'email'></ion-input>
+				<ion-input type="email" placeholder="{{'Email' | translate}}" formControlName = 'email'></ion-input>
 			</ion-item>
 			<!-- <div *ngIf="f.submitted && forgot_form.controls.email.errors?.pattern">Please enter valid email address</div>
 			<div *ngIf="f.submitted && forgot_form.controls.email.errors?.required">Please enter valid email address</div> -->
@@ -22,10 +22,10 @@
 	</form>
 	<ion-list class="common-btns">
 		<ion-item>
-			<button ion-button outline (click)='goto_forgot_otp()' type="submit" [disabled]='forgot_form.invalid'>NEXT</button>
+			<button ion-button outline (click)='goto_forgot_otp()' type="submit" [disabled]='forgot_form.invalid'>{{'Next' | translate}}</button>
 		</ion-item>
 		<ion-item>
-			<button ion-button outline (click)='goto_login()'>BACK</button>
+			<button ion-button outline (click)='goto_login()'>{{'BACK' | translate}}</button>
 		</ion-item>
 	</ion-list>
 </ion-content>

@@ -6,13 +6,17 @@
 -->
 <ion-header>
 
-	<ion-navbar>
-		<ion-title>Games
-			<span class="earned-rewards">1200Cr</span>
-		</ion-title>
+	<ion-navbar class="center-title">
+		<ion-title>{{'Games' | translate}}</ion-title>
+		<ion-buttons end>
+			<button ion-button icon-only class="notification" (click)='GoTo_notifications()'>
+				<ion-badge class='badge'>{{shared.badgeCounter}}</ion-badge>
+				<img src="assets/imgs/bell.svg" alt="notifications">
+			</button>
+		</ion-buttons>
 		<ion-buttons end>
 			<button ion-button icon-only (click)='presentActionSheet()'>
-				<img src="assets/imgs/menu.png" alt="menu">
+				<img src="assets/imgs/menu.png" alt="menu">				
 			</button>
 		</ion-buttons>
 	</ion-navbar>
@@ -23,9 +27,22 @@
 <ion-content padding>
 
 	<ion-refresher (ionRefresh)="doRefresh($event)">
-		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Refreshing...">
+		<ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" >
 		</ion-refresher-content>
 	</ion-refresher>
+	<ion-list class="player-code-container">
+		<ion-item class="player-code">
+			<span>{{'Your Player Code' | translate}}</span>
+			{{GameCode}}
+		</ion-item>
+		<ion-item>
+			<ion-list class="common-btns">
+				<ion-item>
+					<button ion-button outline (click)='Code_copy()'>{{'COPY' | translate}}</button>
+				</ion-item>
+			</ion-list>
+		</ion-item>
+	</ion-list>
 	<!-- <ion-card *ngFor='let game of Games'>
 		<img src="{{game.avatar}}" *ngIf='game.avatar != null' />
 		<img src="assets/imgs/dota-2.jpg" *ngIf='game.avatar == null' />
@@ -56,24 +73,23 @@
 			</ion-list>
 		</ion-card-content>
 	</ion-card> -->
-	<ion-card  *ngFor='let game of Games'>
+		<ion-card *ngFor='let game of Games'>
 		<img src="{{game.avatar}}" *ngIf='game.avatar != null' />
 		<img src="assets/imgs/dota-2.jpg" *ngIf='game.avatar == null' />
 		<ion-card-content>
-			<ion-card-header class="price-earned" *ngIf='game.jackpot != null'>
+			<ion-card-header class="price-earned" *ngIf='game.jackpot != null && game.bannerContent == null'>
 				<img src="assets/imgs/cup.png" alt="cup">
-				Jackpot Prize: <span> {{game.jackpot}} </span>
+				<span> {{game.jackpot}} </span>
 			</ion-card-header>
-			<ion-card-header class="price-redeemed" *ngIf='game.bannerContent != null'>
-				<!-- Jackpot Claimed! <span> 10 ETH distributed</span> -->
-				{{game.bannerContent}}
+			<ion-card-header class="price-redeemed" *ngIf='game.jackpot == null && game.bannerContent != null'>
+				<span> {{game.bannerContent}}</span>
 			</ion-card-header>
 			<ion-card-title>
 				{{game.title}}
 			</ion-card-title>
 			<ion-list class="platform">
 				<ion-item>
-					Platform :
+					{{'Platform' | translate}} :
 				</ion-item>
 				<ion-item>
 					{{game.platform}}
@@ -81,7 +97,7 @@
 			</ion-list>
 			<ion-list class="force">
 				<ion-item>
-					Force Available :
+					{{'Force Available' | translate}} :
 				</ion-item>
 				<ion-item>
 					{{game.reward}}
@@ -89,41 +105,13 @@
 			</ion-list>
 			<ion-list class="common-btns">
 				<ion-item>
-					<button ion-button outline (click)='play(game.link)'>Play Now</button>
+					<button ion-button outline (click)='play(game.link)'>{{'Play Now' | translate}}</button>
+				</ion-item>
+				<ion-item>
+					<button ion-button outline (click)='openModal(game)' [disabled]="game.prizes == ''" >{{'Prize' | translate}}</button>
 				</ion-item>
 			</ion-list>
 		</ion-card-content>
 	</ion-card>
-	<!-- <ion-card>
-		<img src="assets/imgs/marvel.jpg" />
-		<ion-card-content>
-			<ion-card-header class="price-redeemed">
-				Jackpot Claimed! <span> 10 ETH distributed</span>				
-			</ion-card-header>
-			<ion-card-title>
-				Marvel Heroes
-			</ion-card-title>
-			<ion-list class="platform">
-				<ion-item>
-					Platform :
-				</ion-item>
-				<ion-item>
-					XBOX
-				</ion-item>
-			</ion-list>
-			<ion-list class="force">
-				<ion-item>
-					Force Available :
-				</ion-item>
-				<ion-item>
-					1,500
-				</ion-item>
-			</ion-list>
-			<ion-list class="common-btns">
-				<ion-item>
-					<button ion-button outline>Play Now</button>
-				</ion-item>
-			</ion-list>
-		</ion-card-content>
-	</ion-card> -->
+	
 </ion-content>

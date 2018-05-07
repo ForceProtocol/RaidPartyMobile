@@ -4,24 +4,47 @@ import 'rxjs/add/operator/map';
 import { ToastController, LoadingController } from 'ionic-angular';
 
 import { Storage } from '@ionic/storage';
+import { Globalization } from '@ionic-native/globalization';
+import { TranslateService } from '@ngx-translate/core';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 
 @Injectable()
 export class SharedService {
+    badgeCounter: any;
+    locale: any;
     loading: any;
     isOnline: boolean;
     reqOptions: any;
     Uuid: any;
     baseUrl: string;
     user: any;
-    constructor(public http: HttpClient, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public storage: Storage) {
-        this.baseUrl = 'http://staging.hub.raidparty.io/mob/player/';
+    token: any;
+    page:boolean = false
+    constructor(public http: HttpClient,public translate:TranslateService, public globalization: Globalization, public loadingCtrl: LoadingController, public toastCtrl: ToastController, public storage: Storage) {
+        this.baseUrl = 'https://staging.hub.raidparty.io/mob/player/';
         // this.baseUrl = 'https://hub.raidparty.io/mob/player/';
         this.getHeaders();
     }
 
+    translatelang(message){
+        return new Promise((resolve,reject)=>{
+            this.translate.get(message).subscribe(res=>{
+                resolve(res)
+            })
+        })
+        
+    }
+    getUserlang() {
+        return new Promise((resolve, reject) => {
+            this.globalization.getPreferredLanguage().then(res => {
+                console.log(res, 'inject lang')
+                resolve(res.value)
+            })
+        })
 
+    }
     startLoading() {
         this.loading = this.loadingCtrl.create({
             spinner: 'dots'
@@ -36,7 +59,7 @@ export class SharedService {
         })
     }
     // Toast message display
-    showToast(message: string) {
+    showToast(message) {
         let toast = this.toastCtrl.create({
             message: message,
             duration: 3000,
@@ -92,8 +115,9 @@ export class SharedService {
     }
 
     // Get user wallets
-    user_dashboard() {
-        return this.http.get(`${this.baseUrl}dashboard`, this.reqOptions);
+    user_dashboard(data) {
+        console.log(data)
+        return this.http.get(`${this.baseUrl}dashboard?locale=` + data.locale, this.reqOptions);
     }
 
     // Reset password Api
@@ -121,14 +145,23 @@ export class SharedService {
     }
 
     GameList(data) {
-        return this.http.get(`${this.baseUrl}games?device_type=` + data, this.reqOptions);
+        return this.http.get(`${this.baseUrl}games?device_type=` + data + `&locale=` + this.locale, this.reqOptions);
     }
 
-    getcode(){
-        return this.http.get('https://raidpartymobile.docs.apiary.io/#reference/0/authenticated-routes/get-game-code/mob/player/game/code',this.reqOptions);
+    getcode() {
+        return this.http.get(`${this.baseUrl}code`, this.reqOptions);
     }
 
-    GameReward(){
-        return this.http.get(`${this.baseUrl}rewards`, this.reqOptions);
+    GameReward() {
+        return this.http.get(`${this.baseUrl}rewards?locale=` + this.locale, this.reqOptions);
     }
+
+    notifications() {
+        return this.http.get(`${this.baseUrl}notifications?locale=` + this.locale, this.reqOptions);
+    }
+    deleteNotification(id) {
+        return this.http.post(`${this.baseUrl}notification/delete`, this.formData(id), this.reqOptions);
+    }
+
+
 }

@@ -33,17 +33,23 @@ export class ResetPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ResetPage',this.shared.user.email);
+    this.storage.get('locale').then(res=>{
+      this.shared.locale = res
+    })
   }
   goto_dashboard() {
-    if(this.forgot_form.value.pwd != this.forgot_form.value.cpd){
-      this.shared.showToast('password and Confirm password not match');
+    if(this.forgot_form.value.pwd != this.forgot_form.value.cpd){      
+      this.shared.translatelang('password and Confirm password not match').then(res=>{
+        this.shared.showToast(res)
+      })
       return false;
     }
     if (this.forgot_form.valid) {
       var param = {
         'email':this.navParams.get('email'),
         'pin':this.navParams.get('pin'),
-        'password':this.forgot_form.value.pwd
+        'password':this.forgot_form.value.pwd,
+        'locale':this.shared.locale
       }
       this.shared.user_reset_password(param).subscribe(res => {
         console.log(res,'reset password');
